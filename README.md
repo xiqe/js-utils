@@ -1,2 +1,2 @@
-# tree-js-util
+# js-utils
 javascript tool function for tree structure
