@@ -5,10 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Demo</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="./index.js"  type="module"></script>
+    <script>
+        const config = {
+            headers:{
+                'oeUser-Token': 'f42c14f6-d912-4194-9958-f40986792de2'
+            }
+        };
+        const url = "https://vue.oepay.me/view/index.html";
 
+        axios.get(url, config)
+            .then(res=> {
+                let str = res.data.replaceAll('./static/','https://vue.oepay.me/view/static/')
+                console.log(str)
+                // 获取iframe元素
+                var iframe = document.getElementById('iframe');
+
+                // 获取iframe的内容文档对象
+                var iframeDocument = iframe.contentDocument || iframe.contentWindow.document;
+
+                // HTML代码
+                var htmlCode = str;
+
+                // 将HTML代码写入iframe的内容文档
+                iframeDocument.open();
+                iframeDocument.write(htmlCode);
+                iframeDocument.close();
+
+            })
+            .catch(err=> console.log(err))
+    </script>
 </head>
 <body>
-    
+    <iframe src="" frameborder="0" id="iframe"></iframe>
 </body>
 </html>
